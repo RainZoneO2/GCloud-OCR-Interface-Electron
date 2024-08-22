@@ -1,1 +1,0 @@
-# GCloud-OCR-Interface-Electron
