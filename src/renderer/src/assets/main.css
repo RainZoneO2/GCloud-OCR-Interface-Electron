@@ -1,20 +1,33 @@
-@import './base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@media (max-width: 720px) {
-  .text {
-    font-size: 20px;
+@layer base {
+  #root {
+    @apply h-full;
   }
-}
 
-@media (max-width: 620px) {
-  .versions {
-    display: none;
+  html,
+  body {
+    @apply h-full;
+
+    @apply select-none;
+
+    @apply font-mono antialiased text-black;
   }
-}
 
-@media (max-width: 350px) {
-  .tip,
-  .actions {
-    display: none;
+  /* Custom styles for text selection and highlighting */
+  .upload-response {
+    @apply bg-gray-100; /* Light gray background */
+    @apply rounded-lg; /* Rounded corners */
+    @apply p-4; /* Padding */
+    user-select: text; /* Enable text selection */
+  }
+
+  .upload-response pre {
+    @apply whitespace-pre-wrap; /* Preserve whitespace and wrap text */
+    @apply break-words; /* Break long words */
+    @apply text-sm; /* Small text size */
+    @apply text-gray-600; /* Text color */
   }
 }
