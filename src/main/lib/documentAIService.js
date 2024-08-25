@@ -44,6 +44,7 @@ export default async function processDocument(filePath) {
   const { text } = document
   console.log(`Full document text: ${JSON.stringify(text)}`)
   console.log(`There are ${document.pages.length} page(s) in this document.`)
+
   for (const page of document.pages) {
     console.log(`Page ${page.pageNumber}`)
     printPageDimensions(page.dimension)
@@ -55,21 +56,25 @@ export default async function processDocument(filePath) {
   }
 
   // Read the text recognition output from the processor
-  // console.log('The document contains the following paragraphs:')
-  const [page1] = document.pages
-  const paragraphs = page1.paragraphs.map((paragraph) => {
-    const paragraphText = getText(paragraph.layout.textAnchor, text)
-    // console.log(`Extracted paragraph: ${paragraphText}`)
-    return paragraphText
-  })
+  const paragraphs = []
+  const formFields = []
 
-  // console.log('The document contains the following form fields:')
-  const formFields = page1.formFields.map((field) => {
-    const fieldName = getText(field.fieldName.textAnchor, text)
-    const fieldValue = getText(field.fieldValue.textAnchor, text)
-    // console.log(`Extracted form field: ${fieldName} -> ${fieldValue}`)
-    return { name: fieldName, value: fieldValue }
-  })
+  for (const page of document.pages) {
+    // Extract paragraphs from the current page
+    const currentPageParagraphs = page.paragraphs.map((paragraph) => {
+      const paragraphText = getText(paragraph.layout.textAnchor, text)
+      return paragraphText
+    })
+    paragraphs.push(...currentPageParagraphs)
+
+    // Extract form fields from the current page
+    const currentPageFormFields = page.formFields.map((field) => {
+      const fieldName = getText(field.fieldName.textAnchor, text)
+      const fieldValue = getText(field.fieldValue.textAnchor, text)
+      return { name: fieldName, value: fieldValue }
+    })
+    formFields.push(...currentPageFormFields)
+  }
 
   console.log('Document processing complete.')
 

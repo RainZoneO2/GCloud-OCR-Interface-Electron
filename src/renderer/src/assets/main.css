@@ -14,20 +14,29 @@
     @apply select-none;
 
     @apply font-mono antialiased text-black;
+
+    @apply overflow-auto;
   }
 
-  /* Custom styles for text selection and highlighting */
   .upload-response {
-    @apply bg-gray-100; /* Light gray background */
-    @apply rounded-lg; /* Rounded corners */
-    @apply p-4; /* Padding */
-    user-select: text; /* Enable text selection */
+    @apply bg-gray-100;
+    @apply rounded-lg;
+    @apply p-4;
+    @apply overflow-auto;
+    @apply max-h-screen;
+    user-select: text;
   }
 
   .upload-response pre {
-    @apply whitespace-pre-wrap; /* Preserve whitespace and wrap text */
-    @apply break-words; /* Break long words */
-    @apply text-sm; /* Small text size */
-    @apply text-gray-600; /* Text color */
+    @apply whitespace-pre-wrap;
+    @apply break-words;
+    @apply text-sm;
+    @apply text-gray-600;
+    @apply overflow-auto;
+  }
+
+  .upload-container {
+    @apply h-full;
+    @apply overflow-auto; /* Ensure this container is scrollable */
   }
 }

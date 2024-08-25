@@ -30,11 +30,11 @@ const UploadResponse = ({ response }) => {
   }
 
   return (
-    <div>
+    <div className="upload-container">
       <div className="mt-4 upload-response">
         <h3 className="text-lg font-semibold text-gray-700">Upload Response</h3>
         <div>
-          <h4 className="text-md font-semibold">Paragraphs:</h4>
+          <h4 className="text-md font-semibold ">Paragraphs:</h4>
           {renderParagraphs()}
         </div>
         <div className="mt-2">
