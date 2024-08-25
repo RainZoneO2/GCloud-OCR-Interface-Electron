@@ -19,7 +19,9 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
+    "@google-cloud/documentai": "^8.9.0",
     "axios": "^1.7.5",
+    "dotenv": "^16.4.5",
     "electron-updater": "^6.1.7",
     "prop-types": "^15.8.1"
   },

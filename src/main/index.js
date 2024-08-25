@@ -1,7 +1,9 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import processDocument from '@/lib/documentAIService'
+import exportResponseToFile from '@/lib/fileExporter'
 
 function createWindow() {
   // Create the browser window.
@@ -52,8 +54,21 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
+  // IPC Handle
+  ipcMain.handle('process-document', async (event, filePath) => {
+    try {
+      const result = await processDocument(filePath)
+      console.log('Data sent to renderer:', result)
+      return result
+    } catch (error) {
+      console.error('Error processing document:', error)
+      throw error
+    }
+  })
+
+  ipcMain.handle('export-response', async (event, data) => {
+    return await exportResponseToFile(data)
+  })
 
   createWindow()
 
